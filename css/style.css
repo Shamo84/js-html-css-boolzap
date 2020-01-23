@@ -126,9 +126,9 @@ i {
   height: 77%;
   flex-direction: column;
   align-items: flex-start;
-  overflow-y: auto;
-  margin-right: 3.5%;
-  border-right: 1px solid #e5e5e5;
+  overflow-y: scroll;
+  /* margin-right: 3.5%; */
+  /* border-right: 1px solid #e5e5e5; */
 }
 #lista-contatti .contatto {
   height: 80px;
@@ -194,9 +194,10 @@ i {
 #chat #chat-main {
   height: 84%;
   background-image: url(../img/chat-background.jpeg);
-  margin-right: 2%;
+  /* margin-right: 2%; */
   display: block;
   padding: 50px 54px 50px 80px;
+  overflow-y: scroll;
 }
 #chat-main p {
   line-height: 68px;
