@@ -196,10 +196,10 @@ i {
   background-image: url(../img/chat-background.jpeg);
   margin-right: 2%;
   display: block;
-  padding: 50px 80px;
+  padding: 50px 54px 50px 80px;
 }
 #chat-main p {
-  line-height: 53px;
+  line-height: 68px;
 }
 #chat-main p span{
   padding: 20px 18px;
@@ -224,7 +224,7 @@ i {
   font-size: 10px;
   color: #cacaca;
 }
-#chat-main .user-message-template {
+#chat-main div[id*="template"] {
   display: none;
 }
 #chat-footer {

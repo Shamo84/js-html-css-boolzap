@@ -1,9 +1,11 @@
 $(document).ready(function() {
-  $("#footer-chat input").keypress(function(event) {
+  $("#chat-footer input").keypress(function(event) {
     if (event.which == 13) {
-      var chatTemplate = $("main-chat .user-message-template").clone();
-      chatTemplate.children("p").text($(this).val());
-      $("main-chat").append(chatTemplate);
+      var chatTemplate = $("#chat-main #user-message-template p").clone();
+      chatTemplate.children("span").text($(this).val());
+      $("#chat-main").append(chatTemplate);
+      var contactTemplate = $("#chat-main #contact-message-template p").clone();
+      setTimeout(function() {$("#chat-main").append(contactTemplate)}, 1000);
     }
   });
 });
