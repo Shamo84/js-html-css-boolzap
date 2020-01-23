@@ -18,9 +18,64 @@ body {
 }
 
 #player {
+  width: 80.8%;
+  height: 90.6%;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+}
+
+#contatti {
+  width: calc(100% / 3);
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+}
+#contatti > div {
+  display: flex;
+  align-items: center;
+}
+#chat {
+  width: calc(200% / 3);
   background-color: lightgreen;
+  display: flex;
+  flex-direction: column;
+}
+
+#header-contatti {
+  height: 8%;
+  background-color: #e7e7e7;
+}
+#immagine-profilo{
+  background-image: url(../img/avatar1.png);
+  height: 50px;
+  width: 50px;
+}
+.avatar {
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#notifiche-contatti {
+  height: 9%;
+  background-color: #84d4f9;
+}
+#cerca-contatti {
+  height: 5.65%;
+  background-color: #f9f9f9;
+}
+#header-chat {
+  height: 8%;
+  background-color: #e7e7e7;
+}
+#main-chat {
+  height: 84%;
+}
+#footer-chat {
+  height: 8%;
+  background-color: #e7e7e7;
 }
