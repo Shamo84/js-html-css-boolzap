@@ -15,7 +15,6 @@ body {
   height: 138px;
 }
 #bottom-background {
-  background: rgb(218,219,212);
   background: linear-gradient(180deg, rgba(218,219,212,1) 100%, rgba(210,219,220,1) 100%);
   height: calc(100vh - 138px);
 }
