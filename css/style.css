@@ -24,6 +24,7 @@ i {
   color: #c4c4c4;
   font-size: 22px;
   padding: 8px;
+  cursor: pointer;
 }
 .avatar {
   border-radius: 50%;
@@ -188,34 +189,29 @@ i {
 #chat #chat-main {
   height: calc(100% - 140px);
   background-image: url(../img/chat-background.jpeg);
-  /* margin-right: 2%; */
-  display: block;
-  padding: 50px 54px 50px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 50px 80px;
   overflow-y: scroll;
 }
-#chat-main p {
-  line-height: 68px;
-}
-#chat-main p span{
+#chat-main span{
   padding: 20px 18px;
   border-radius: 10px;
+  position: relative;
 }
-#chat-main p.user-message {
-  text-align: right;
-}
-#chat-main p.user-message span {
+#chat-main span.user-message {
+  align-self: flex-end;
   background-color: #d0f8b6;
 }
-#chat-main p.contact-message {
-  text-align: left;
-}
-#chat-main p.contact-message span {
+#chat-main span.contact-message {
+  align-self: flex-start;
   background-color: white;
 }
-#chat-main p time {
-  position: relative;
-  left: -32px;
-  top: 16px;
+#chat-main time {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
   font-size: 10px;
   color: #cacaca;
 }
@@ -237,4 +233,9 @@ i {
 }
 #chat-footer i {
   margin: 0 20px;
+  width: 38px;
+  text-align: center;
+}
+.display-none {
+  display: none;
 }
