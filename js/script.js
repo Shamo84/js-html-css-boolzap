@@ -7,14 +7,16 @@ $(document).ready(function() {
   }, 1);
   });
 // TOGGLE DELLE ICONE ALL'INPUT CHAT
-  $("#chat-footer input").keydown(function() {
-    if ($("#chat-footer input").val().length == 0) {
-      $("#chat-footer .fa-microphone").show();
-      $("#chat-footer .fa-paper-plane").hide();
-    } else if (event.which >= 32 && event.which <= 255) {
-      $("#chat-footer .fa-microphone").hide();
-      $("#chat-footer .fa-paper-plane").show();
-    }
+  $("#chat-footer input").keydown(function(event) {
+    setTimeout(function() {
+      if ($("#chat-footer input").val().length == 0) {
+        $("#chat-footer .fa-microphone").show();
+        $("#chat-footer .fa-paper-plane").hide();
+      } else if (event.which >= 32 && event.which <= 255) {
+        $("#chat-footer .fa-microphone").hide();
+        $("#chat-footer .fa-paper-plane").show();
+      }
+    }, 1);
   });
   // INVIO MESSAGGIO AL CLICK SULL'AEROPLANINO
   $("#chat-footer .fa-paper-plane").click(function() {
