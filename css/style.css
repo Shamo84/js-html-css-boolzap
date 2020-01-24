@@ -198,6 +198,8 @@ i {
   padding: 20px 18px;
   border-radius: 10px;
   position: relative;
+  margin: 5px 0;
+  max-width: 85%;
 }
 #chat-main span.user-message {
   align-self: flex-end;
