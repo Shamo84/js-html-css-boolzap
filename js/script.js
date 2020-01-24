@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $("#chat-footer input").keypress(function(event) {
-    if (event.which == 13) {
+    if (event.which == 13 && $(this).val() != "") {
       var newDate = new Date();
       var time = newDate.getHours() + ":" + newDate.getMinutes();
       var chatTemplate = $("#chat-main #user-message-template p").clone();
