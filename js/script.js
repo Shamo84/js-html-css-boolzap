@@ -2,15 +2,8 @@ $(document).ready(function() {
   // Cerca tra i contatti
   $("#cerca-contatti input").keydown(function() {
     setTimeout(function() {
-      var text = $("#cerca-contatti input").val();
       var textLo = $("#cerca-contatti input").val().toLowerCase();
-      var textUp = $("#cerca-contatti input").val().toUpperCase();
-      if (textLo.length > 0) {
-        var textCap = textLo[0].toUpperCase() + textLo.substr(1);
-      } else {
-        var textCap = "";
-      }
-      contactSearch(text, textLo, textUp, textCap);
+      contactSearch(textLo);
   }, 1);
   });
 // TOGGLE DELLE ICONE ALL'INPUT CHAT
@@ -34,12 +27,15 @@ $(document).ready(function() {
     }
   });
 });
-function contactSearch(string, stringLo, stringUp, stringCap) {
+function contactSearch(stringLo) {
   $(".contatto").hide();
-  $(".contatto .nome-contatto:contains(" + string + ")").parents(".contatto").show();
-  $(".contatto .nome-contatto:contains(" + stringLo + ")").parents(".contatto").show();
-  $(".contatto .nome-contatto:contains(" + stringUp + ")").parents(".contatto").show();
-  $(".contatto .nome-contatto:contains(" + stringCap + ")").parents(".contatto").show();
+  var nameToLowerCase;
+  for (var i = 0; i < $(".contatto").length; i++) {
+    nameToLowerCase = $(".contatto").eq(i).find(".nome-contatto").text().toLowerCase();
+    if (nameToLowerCase.includes(stringLo)) {
+      $(".contatto").eq(i).show();
+    }
+  }
 }
 
 function sendMessage() {
@@ -72,7 +68,8 @@ function rispostaFiccante() {
     "piuttosto mi butto dal balcone",
     "non vedo l'ora di perdermelo",
     "sei utile come la forchetta nella zuppa",
-    "se mio nonno avesse le rotelle sarebbe una carriola"
+    "se mio nonno avesse le rotelle sarebbe una carriola",
+    "mi hai fatto venire voglia di bere della cicuta"
   ];
   var randomNum = Math.floor(Math.random() * 5);
   return arrayRisposte[randomNum];
