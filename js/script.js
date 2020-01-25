@@ -7,9 +7,11 @@ $(document).ready(function() {
     }, 1);
   });
   // CHEVRON DOWN QUANDO HOVERI SU UN MESSAGGIO
-  $(document).on("mouseover", ".chat-main div.overlay", function() {
-    var chevronClone = $("#template .fa-chevron-down").clone();
-    chevronClone.prependTo($(this).parent("span"));
+  $(document).on("mouseover", ".chat-main div.overlay", function(event) {
+    if ($(event.target).siblings("i").hasClass("fa-chevron-down") == false) {
+      var chevronClone = $("#template .fa-chevron-down").clone();
+      chevronClone.prependTo($(this).parent("span"));
+    }
   });
   $(document).on("mouseout", ".chat-main div.overlay", function(event) {
     console.log($(event.target).siblings("div").hasClass("message-menu"));
