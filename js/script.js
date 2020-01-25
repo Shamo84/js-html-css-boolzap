@@ -22,10 +22,11 @@ $(document).ready(function() {
     if ($(event.target).hasClass('overlay')) {
       var messageMenuClone = $("#template .message-menu").clone();
       messageMenuClone.prependTo($(event.target).parent("span"));
-    }
-    else if (!$(event.target).closest('.message-menu').length) {
+    } else if (!$(event.target).closest('.message-menu').length) {
       $(".chat-main .message-menu").remove();
       $(".chat-main .fa-chevron-down").remove();
+    } else if ($(event.target).hasClass("delete-message")) {
+      $(event.target).parents(".message").remove();
     }
   });
   // TOGGLE DELLE ICONE ALL'INPUT CHAT
@@ -76,7 +77,7 @@ function sendMessage() {
   var newDate = new Date();
   var time = timeDigits(newDate.getHours()) + ":" + timeDigits(newDate.getMinutes());
   $(".contatto.active").children("time").text(time);
-  var chatTemplate = $("#template .user-message").clone();
+  var chatTemplate = $("#template .user.message").clone();
   var message = $("#chat-footer input").val();
   chatTemplate.prepend(message);
   chatTemplate.children("time").text(time);

@@ -228,11 +228,11 @@ i {
   top: 0;
   cursor: pointer;
 }
-.chat-main span.user-message {
+.chat-main span.user {
   align-self: flex-end;
   background-color: #d0f8b6;
 }
-.chat-main span.contact-message {
+.chat-main span.contact {
   align-self: flex-start;
   background-color: white;
 }
