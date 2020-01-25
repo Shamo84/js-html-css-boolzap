@@ -2,11 +2,35 @@ $(document).ready(function() {
   // Cerca tra i contatti
   $("#cerca-contatti input").keydown(function() {
     setTimeout(function() {
-      var textLo = $("#cerca-contatti input").val().toLowerCase();
+      var textLo = $("#cerca-contatti input").val().toLowerCase().trim();
       contactSearch(textLo);
     }, 1);
   });
-// TOGGLE DELLE ICONE ALL'INPUT CHAT
+  // CHEVRON DOWN QUANDO HOVERI SU UN MESSAGGIO
+
+  $(document).on("mouseover", ".chat-main div.overlay", function() {
+    var chevronClone = $("#template .fa-chevron-down").clone();
+    chevronClone.prependTo($(this).parent("span"));
+  });
+  $(document).on("mouseout", ".chat-main div.overlay", function() {
+    console.log($(this).siblings("div").hasClass("message-menu"));
+    if ($(this).siblings("div").hasClass("message-menu") == false) {
+      $(this).siblings(".fa-chevron-down").remove();
+    }
+  });
+  // FA COMPARIRE IL MESSAGE MENU QUANDO CLIKKI SULLA CHEVRON DOWN
+  $(document).on("click", ".chat-main .overlay", function() {
+      var messageMenuClone = $("#template .message-menu").clone();
+      messageMenuClone.prependTo($(this).parent("span"));
+  });
+  //  CHIUDE IL MESSAGE MENU QUANDO CLIKKI FUORI
+  $(document).on("click", "div", function() {
+    if (!$(this).hasClass("message-menu")) {
+      console.log($(this));
+      $(".message-menu").remove();
+    }
+  });
+  // TOGGLE DELLE ICONE ALL'INPUT CHAT
   $("#chat-footer input").keydown(function(event) {
     setTimeout(function() {
       if ($("#chat-footer input").val().length == 0) {
@@ -54,7 +78,7 @@ function sendMessage() {
   var newDate = new Date();
   var time = timeDigits(newDate.getHours()) + ":" + timeDigits(newDate.getMinutes());
   $(".contatto.active").children("time").text(time);
-  var chatTemplate = $("#user-message-template span").clone();
+  var chatTemplate = $("#template .user-message").clone();
   var message = $("#chat-footer input").val();
   chatTemplate.prepend(message);
   chatTemplate.children("time").text(time);
@@ -62,7 +86,7 @@ function sendMessage() {
   $("#chat-footer input").val("");
   $("#chat-footer .fa-microphone").show();
   $("#chat-footer .fa-paper-plane").hide();
-  var contactTemplate = $("#contact-message-template span").clone();
+  var contactTemplate = $("#template .contact-message").clone();
   contactTemplate.prepend(rispostaFiccante());
   contactTemplate.children("time").text(time);
   $(".contatto.active").prependTo("#lista-contatti");

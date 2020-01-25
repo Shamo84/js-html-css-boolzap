@@ -220,6 +220,14 @@ i {
   margin: 5px 0;
   max-width: 85%;
 }
+.chat-main div.overlay{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
 .chat-main span.user-message {
   align-self: flex-end;
   background-color: #d0f8b6;
@@ -228,6 +236,12 @@ i {
   align-self: flex-start;
   background-color: white;
 }
+.chat-main span i {
+  position: absolute;
+  right: 2px;
+  top: -5px;
+  font-size: 19px;
+}
 .chat-main time {
   position: absolute;
   right: 6px;
@@ -235,8 +249,21 @@ i {
   font-size: 10px;
   color: #cacaca;
 }
-.chat-main div[id*="template"] {
-  display: none;
+.chat-main .message-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -120px;
+  background-color: white;
+  padding: 5px 10px;
+}
+.chat-main .message-menu p {
+  font-size: 14px;
+  white-space: nowrap;
+  line-height: 36px;
+  cursor: pointer;
+  padding: 0 10px;
+  margin: 10px 0;
 }
 #chat-footer {
   height: 70px;
