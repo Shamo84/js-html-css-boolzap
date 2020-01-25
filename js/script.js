@@ -7,27 +7,25 @@ $(document).ready(function() {
     }, 1);
   });
   // CHEVRON DOWN QUANDO HOVERI SU UN MESSAGGIO
-
   $(document).on("mouseover", ".chat-main div.overlay", function() {
     var chevronClone = $("#template .fa-chevron-down").clone();
     chevronClone.prependTo($(this).parent("span"));
   });
-  $(document).on("mouseout", ".chat-main div.overlay", function() {
-    console.log($(this).siblings("div").hasClass("message-menu"));
-    if ($(this).siblings("div").hasClass("message-menu") == false) {
-      $(this).siblings(".fa-chevron-down").remove();
+  $(document).on("mouseout", ".chat-main div.overlay", function(event) {
+    console.log($(event.target).siblings("div").hasClass("message-menu"));
+    if ($(event.target).siblings("div").hasClass("message-menu") == false) {
+      $(event.target).siblings(".fa-chevron-down").remove();
     }
   });
-  // FA COMPARIRE IL MESSAGE MENU QUANDO CLIKKI SULLA CHEVRON DOWN
-  $(document).on("click", ".chat-main .overlay", function() {
+  //  APRE IL MESSAGE MENU QUANDO CLIKKI LA FRECCIA E LO CHIUDE QUANDO CLIKKI FUORI
+  $(document).on('click', function(event) {
+    if ($(event.target).hasClass('overlay')) {
       var messageMenuClone = $("#template .message-menu").clone();
-      messageMenuClone.prependTo($(this).parent("span"));
-  });
-  //  CHIUDE IL MESSAGE MENU QUANDO CLIKKI FUORI
-  $(document).on("click", "div", function() {
-    if (!$(this).hasClass("message-menu")) {
-      console.log($(this));
-      $(".message-menu").remove();
+      messageMenuClone.prependTo($(event.target).parent("span"));
+    }
+    else if (!$(event.target).closest('.message-menu').length) {
+      $(".chat-main .message-menu").remove();
+      $(".chat-main .fa-chevron-down").remove();
     }
   });
   // TOGGLE DELLE ICONE ALL'INPUT CHAT
