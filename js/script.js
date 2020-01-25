@@ -85,7 +85,7 @@ function sendMessage() {
   $("#chat-footer input").val("");
   $("#chat-footer .fa-microphone").show();
   $("#chat-footer .fa-paper-plane").hide();
-  var contactTemplate = $("#template .contact-message").clone();
+  var contactTemplate = $("#template .contact.message").clone();
   contactTemplate.prepend(rispostaFiccante());
   contactTemplate.children("time").text(time);
   $(".contatto.active").prependTo("#lista-contatti");
@@ -113,7 +113,8 @@ function rispostaFiccante() {
     "non vedo l'ora di perdermelo",
     "sei utile come la forchetta nella zuppa",
     "se mio nonno avesse le rotelle sarebbe una carriola",
-    "mi hai fatto venire voglia di bere della cicuta"
+    "mi hai fatto venire voglia di bere della cicuta",
+    "tutt'ad un tratto il suicidio mi sembra un'opzione plausibile"
   ];
   var randomNum = Math.floor(Math.random() * 5);
   return arrayRisposte[randomNum];
