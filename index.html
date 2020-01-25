@@ -15,7 +15,7 @@
   <div id="bottom-background" class="background"></div>
   <div id="player">
     <div id="contatti">
-      <div id="header-contatti">
+      <div id="header-contatti" class="flex">
         <div id="immagine-profilo" class="avatar"></div>
         <div class="icons">
           <i class="fas fa-circle-notch"></i>
@@ -23,7 +23,7 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </div>
-      <div id="notifiche-contatti">
+      <div id="notifiche-contatti" class="flex">
         <div id="bell-wrapper">
           <i class="fas fa-bell-slash"></i>
         </div>
@@ -32,92 +32,127 @@
           <a href="#">Attiva notifiche desktop</a>
         </div>
       </div>
-      <div id="cerca-contatti">
+      <div id="cerca-contatti" class="flex">
         <i class="fas fa-search"></i>
         <input type="text" name="" value="" placeholder="Cerca o inizia una nuova chat">
       </div>
       <div id="lista-contatti">
-        <div class="contatto">
-          <div id="contatto-1" class="avatar"></div>
+        <div class="contatto active">
+          <div userID="1" class="avatar contatto-1"></div>
           <div class="info-contatto">
             <div class="nome-contatto">Michele</div>
             <div class="frase-contatto">Non è bello ciò che è bello</div>
           </div>
-          <time>10:23</time>
+          <time>14:54</time>
         </div>
         <div class="contatto">
-          <div id="contatto-2" class="avatar"></div>
+          <div userID="2" class="avatar contatto-2"></div>
           <div class="info-contatto">
             <div class="nome-contatto">Fabio</div>
             <div class="frase-contatto">Non è bello ciò che è bello</div>
           </div>
-          <time>10:23</time>
+          <time>14:50</time>
         </div>
         <div class="contatto">
-          <div id="contatto-3" class="avatar"></div>
+          <div userID="3" class="avatar contatto-3"></div>
           <div class="info-contatto">
             <div class="nome-contatto">Samuele</div>
             <div class="frase-contatto">Non è bello ciò che è bello</div>
           </div>
-          <time>10:23</time>
+          <time>13:30</time>
         </div>
         <div class="contatto">
-          <div id="contatto-4" class="avatar"></div>
+          <div userID="4" class="avatar contatto-4"></div>
           <div class="info-contatto">
             <div class="nome-contatto">Alessandro B.</div>
             <div class="frase-contatto">Non è bello ciò che è bello</div>
           </div>
-          <time>10:23</time>
+          <time>13:10</time>
         </div>
         <div class="contatto">
-          <div id="contatto-5" class="avatar"></div>
+          <div userID="5" class="avatar contatto-5"></div>
           <div class="info-contatto">
             <div class="nome-contatto">Alessandro L.</div>
             <div class="frase-contatto">Non è bello ciò che è bello</div>
           </div>
-          <time>10:23</time>
+          <time>13:00</time>
         </div>
         <div class="contatto">
-          <div id="contatto-6" class="avatar"></div>
+          <div userID="6" class="avatar contatto-6"></div>
           <div class="info-contatto">
             <div class="nome-contatto">Claudia</div>
             <div class="frase-contatto">Non è bello ciò che è bello</div>
           </div>
-          <time>10:23</time>
+          <time>12:30</time>
         </div>
         <div class="contatto">
-          <div id="contatto-7" class="avatar"></div>
+          <div userID="7" class="avatar contatto-7"></div>
           <div class="info-contatto">
             <div class="nome-contatto">Davide</div>
             <div class="frase-contatto">Non è bello ciò che è bello</div>
           </div>
-          <time>10:23</time>
+          <time>11:20</time>
         </div>
         <div class="contatto">
-          <div id="contatto-8" class="avatar"></div>
+          <div userID="8" class="avatar contatto-8"></div>
           <div class="info-contatto">
             <div class="nome-contatto">Federico</div>
             <div class="frase-contatto">Non è bello ciò che è bello</div>
           </div>
-          <time>10:23</time>
+          <time>10:00</time>
         </div>
       </div>
     </div>
     <div id="chat">
-      <div id="chat-header">
-        <i class="fas fa-search"></i>
-        <i class="fas fa-paperclip"></i>
-        <i class="fas fa-ellipsis-v"></i>
+      <div id="chat-header" class="flex">
+        <div id="foto-contatto" class="avatar contatto-1"></div>
+        <div class="info-contatto">
+          <div class="nome-contatto">Michele</div>
+          <div class="frase-contatto">Ultimo accesso oggi alle 15:40</div>
+        </div>
+        <div class="icons">
+          <i class="fas fa-search"></i>
+          <i class="fas fa-paperclip"></i>
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
       </div>
-      <div id="chat-main">
-        <span class="user-message">ciao<time>10:20</time></span>
-        <span class="contact-message">ok<time>10:20</time></span>
+      <div class="chat-main flex active" userID="1">
+        <span class="user-message">ciao michele!<time>14:54</time></span>
+        <span class="contact-message">ciao cara<time>14:54</time></span>
       </div>
-      <div id="chat-footer">
+      <div class="chat-main flex display-none" userID="2">
+        <span class="user-message">ciao fabio!<time>14:50</time></span>
+        <span class="contact-message">ciao cara<time>14:50</time></span>
+      </div>
+      <div class="chat-main flex display-none" userID="3">
+        <span class="user-message">ciao samuele!<time>13:30</time></span>
+        <span class="contact-message">ciao cara<time>13:30</time></span>
+      </div>
+      <div class="chat-main flex display-none" userID="4">
+        <span class="user-message">ciao alessandro B.!<time>13:10</time></span>
+        <span class="contact-message">ciao cara<time>13:10</time></span>
+      </div>
+      <div class="chat-main flex display-none" userID="5">
+        <span class="user-message">ciao alessandro L.!<time>13:00</time></span>
+        <span class="contact-message">ciao cara<time>13:00</time></span>
+      </div>
+      <div class="chat-main flex display-none" userID="6">
+        <span class="user-message">ciao claudia!<time>12:30</time></span>
+        <span class="contact-message">ciao cara<time>12:30</time></span>
+      </div>
+      <div class="chat-main flex display-none" userID="7">
+        <span class="user-message">ciao davide!<time>11:20</time></span>
+        <span class="contact-message">ciao cara<time>11:20</time></span>
+      </div>
+      <div class="chat-main flex display-none" userID="8">
+        <span class="user-message">ciao federico!<time>10:00</time></span>
+        <span class="contact-message">ciao cara<time>10:00</time></span>
+      </div>
+      <div id="chat-footer" class="flex">
         <i class="far fa-smile"></i>
         <input type="text" name="" value="" placeholder="Scrivi un messaggio">
         <i class="fas fa-microphone"></i>
-        <i class="far fa-paper-plane display-none"></i>
+        <i class="fas fa-paper-plane display-none"></i>
       </div>
     </div>
   </div>

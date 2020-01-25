@@ -4,7 +4,7 @@ $(document).ready(function() {
     setTimeout(function() {
       var textLo = $("#cerca-contatti input").val().toLowerCase();
       contactSearch(textLo);
-  }, 1);
+    }, 1);
   });
 // TOGGLE DELLE ICONE ALL'INPUT CHAT
   $("#chat-footer input").keydown(function(event) {
@@ -12,7 +12,7 @@ $(document).ready(function() {
       if ($("#chat-footer input").val().length == 0) {
         $("#chat-footer .fa-microphone").show();
         $("#chat-footer .fa-paper-plane").hide();
-      } else if (event.which >= 32 && event.which <= 255) {
+      } else {
         $("#chat-footer .fa-microphone").hide();
         $("#chat-footer .fa-paper-plane").show();
       }
@@ -28,14 +28,24 @@ $(document).ready(function() {
       sendMessage();
     }
   });
+  // MOSTRA CHAT, IMMAGINE E NOME DEL CONTATTO ACTIVE
+  $(document).on("click", ".contatto", function() {
+  // $(".contatto").click(function() {
+    $(this).siblings().removeClass("active");
+    $(this).addClass("active");
+    var nomeContattoActive = $(this).find(".nome-contatto").text();
+    var contattoID = $(this).children(".avatar").attr("userID");
+    showContactChat(contattoID, nomeContattoActive);
+  })
 });
 function contactSearch(stringLo) {
-  $(".contatto").hide();
   var nameToLowerCase;
   for (var i = 0; i < $(".contatto").length; i++) {
     nameToLowerCase = $(".contatto").eq(i).find(".nome-contatto").text().toLowerCase();
     if (nameToLowerCase.includes(stringLo)) {
       $(".contatto").eq(i).show();
+    } else {
+      $(".contatto").eq(i).hide();
     }
   }
 }
@@ -43,18 +53,20 @@ function contactSearch(stringLo) {
 function sendMessage() {
   var newDate = new Date();
   var time = timeDigits(newDate.getHours()) + ":" + timeDigits(newDate.getMinutes());
+  $(".contatto.active").children("time").text(time);
   var chatTemplate = $("#user-message-template span").clone();
   var message = $("#chat-footer input").val();
   chatTemplate.prepend(message);
   chatTemplate.children("time").text(time);
-  $("#chat-main").append(chatTemplate);
+  $(".chat-main.active").append(chatTemplate);
   $("#chat-footer input").val("");
   $("#chat-footer .fa-microphone").show();
   $("#chat-footer .fa-paper-plane").hide();
   var contactTemplate = $("#contact-message-template span").clone();
   contactTemplate.prepend(rispostaFiccante());
   contactTemplate.children("time").text(time);
-  setTimeout(function() {$("#chat-main").append(contactTemplate)}, 1000);
+  $(".contatto.active").prependTo("#lista-contatti");
+  setTimeout(function() {$(".chat-main.active").append(contactTemplate)}, 1000);
 }
 
 function timeDigits(number) {
@@ -62,6 +74,13 @@ function timeDigits(number) {
     number = "0" + number;
   }
   return number;
+}
+
+function showContactChat(userID, nomeContattoActive) {
+  $(".chat-main").addClass("display-none").removeClass("active");
+  $(".chat-main").eq(userID-1).addClass("active").removeClass("display-none");
+  $("#foto-contatto").attr("class", "avatar + contatto-" + userID + "");
+  $("#chat-header .nome-contatto").text(nomeContattoActive);
 }
 
 function rispostaFiccante() {
