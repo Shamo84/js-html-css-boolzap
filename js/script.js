@@ -32,6 +32,9 @@ $(document).ready(function() {
       } else if ($(event.target).hasClass('message-info')) {
       } else if ($(event.target).hasClass("delete-message")) {
         $(event.target).parents(".message").remove();
+        var newTime = $(".chat-main.active").children("span:last-child").children("time").text();
+        $(".contatto.active").children("time").text(newTime);
+        riordinaContatti(newTime);
       } else if ($(event.target).hasClass("message") && ($(event.target).find("div").hasClass("message-menu"))) {
       } else {
         $(".chat-main.active .message-menu").remove();
@@ -68,7 +71,6 @@ $(document).ready(function() {
   });
   // MOSTRA CHAT, IMMAGINE E NOME DEL CONTATTO ACTIVE
   $(document).on("click", ".contatto", function() {
-  // $(".contatto").click(function() {
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
     var nomeContattoActive = $(this).find(".nome-contatto").text();
@@ -133,4 +135,21 @@ function rispostaFiccante() {
   ];
   var randomNum = Math.floor(Math.random() * 5);
   return arrayRisposte[randomNum];
+}
+
+function riordinaContatti(newTime) {
+  var timeContatto;
+  var i = 0;
+  newTime = parseInt(newTime.replace(":", ""));
+  do {
+    timeContatto = $(".contatto").eq(i).children("time").text();
+    timeContatto = parseInt(timeContatto.replace(":", ""));
+    if (newTime > timeContatto) {
+      $(".contatto.active").insertBefore(".contatto:eq(" + i + ")");
+      return;
+    }
+    i++;
+  } while (i < $(".contatto").length);
+  $(".contatto.active").appendTo("#lista-contatti");
+  return;
 }
