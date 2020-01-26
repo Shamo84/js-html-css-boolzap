@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  // Cerca tra i contatti
+  // CERCA TRA I CONTATTI
   $("#cerca-contatti input").keydown(function() {
     setTimeout(function() {
       var textLo = $("#cerca-contatti input").val().toLowerCase().trim();
@@ -7,7 +7,7 @@ $(document).ready(function() {
     }, 1);
   });
   // CHEVRON DOWN QUANDO HOVERI SU UN MESSAGGIO
-  $(document).on("mouseover", ".chat-main span.message", function(event) {
+  $(document).on("mouseover", ".chat-main.active span.message", function(event) {
     if ($(event.target).hasClass("message")) {
       if ($(event.target).find("i").hasClass("fa-chevron-down") == false) {
         var chevronClone = $("#template .fa-chevron-down").clone();
@@ -15,33 +15,33 @@ $(document).ready(function() {
       }
     }
   });
-  $(document).on("mouseover", ".chat-main", function(event) {
+  // RIMUOVE LA CHEVRON QUANDO ESCI DAL MESSAGGIO
+  $(document).on("mouseover", ".chat-main.active", function(event) {
     if ($(event.target).hasClass("chat-main")) {
-      for (var i = 0; i < $(".message").length; i++) {
-        if ($(".message").eq(i).find("div").hasClass("message-menu") == false) {
-          $(".message").eq(i).find(".fa-chevron-down").remove();
+      for (var i = 0; i < $(".active .message").length; i++) {
+        if ($(".active .message").eq(i).find("div").hasClass("message-menu") == false) {
+          $(".active .message").eq(i).find(".fa-chevron-down").remove();
         }
       }
     }
   });
   //  APRE IL MESSAGE MENU QUANDO CLIKKI LA FRECCIA E LO CHIUDE QUANDO CLIKKI FUORI
   $(document).on('click', function(event) {
-    if ($(".chat-main").find("div").hasClass("message-menu")) {
+    if ($(".chat-main.active").find("div").hasClass("message-menu")) {
       if ($(event.target).hasClass("message-menu")) {
       } else if ($(event.target).hasClass('message-info')) {
       } else if ($(event.target).hasClass("delete-message")) {
         $(event.target).parents(".message").remove();
       } else if ($(event.target).hasClass("message") && ($(event.target).find("div").hasClass("message-menu"))) {
       } else {
-        $(".chat-main .message-menu").remove();
-        $(".chat-main .fa-chevron-down").remove();
+        $(".chat-main.active .message-menu").remove();
+        $(".chat-main.active .fa-chevron-down").remove();
       }
     } else {
-        if ($(event.target).hasClass('fa-chevron-down')) {
-          var messageMenuClone = $("#template .message-menu").clone();
-          messageMenuClone.prependTo($(event.target).parent("span"));
-        }
-      console.log($(event.target));
+      if ($(event.target).hasClass('fa-chevron-down')) {
+        var messageMenuClone = $("#template .message-menu").clone();
+        messageMenuClone.prependTo($(event.target).parent("span"));
+      }
     }
   });
   // TOGGLE DELLE ICONE ALL'INPUT CHAT
@@ -115,7 +115,7 @@ function timeDigits(number) {
 }
 
 function showContactChat(userid, nomeContattoActive) {
-  $(".chat-main").addClass("display-none").removeClass("active");
+  $(".chat-main.active").addClass("display-none").removeClass("active");
   $(".chat-main").eq(userid-1).addClass("active").removeClass("display-none");
   $("#foto-contatto").attr("class", "avatar + contatto-" + userid + "");
   $("#chat-header .nome-contatto").text(nomeContattoActive);
