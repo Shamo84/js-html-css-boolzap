@@ -247,6 +247,7 @@ i {
   bottom: -120px;
   background-color: white;
   padding: 5px 10px;
+  z-index: 2;
 }
 .chat-main .message-menu p {
   font-size: 14px;
