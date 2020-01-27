@@ -1,10 +1,8 @@
 $(document).ready(function() {
   // CERCA TRA I CONTATTI
-  $("#cerca-contatti input").keydown(function() {
-    setTimeout(function() {
+  $("#cerca-contatti input").keyup(function() {
       var textLo = $("#cerca-contatti input").val().toLowerCase().trim();
       contactSearch(textLo);
-    }, 1);
   });
   // CHEVRON DOWN QUANDO HOVERI SU UN MESSAGGIO
   $(document).on("mouseover", ".chat-main.active span.message", function(event) {
@@ -48,8 +46,7 @@ $(document).ready(function() {
     }
   });
   // TOGGLE DELLE ICONE ALL'INPUT CHAT
-  $("#chat-footer input").keydown(function(event) {
-    setTimeout(function() {
+  $("#chat-footer input").keyup(function(event) {
       if ($("#chat-footer input").val().length == 0) {
         $("#chat-footer .fa-microphone").show();
         $("#chat-footer .fa-paper-plane").hide();
@@ -57,16 +54,17 @@ $(document).ready(function() {
         $("#chat-footer .fa-microphone").hide();
         $("#chat-footer .fa-paper-plane").show();
       }
-    }, 1);
   });
   // INVIO MESSAGGIO AL CLICK SULL'AEROPLANINO
   $("#chat-footer .fa-paper-plane").click(function() {
       sendMessage();
+      getReply();
   });
   // INVIO MESSAGGIO DALL'INPUT
   $("#chat-footer input").keypress(function(event) {
     if (event.which == 13 && $(this).val() != "") {
       sendMessage();
+      getReply();
     }
   });
   // MOSTRA CHAT, IMMAGINE E NOME DEL CONTATTO ACTIVE
@@ -91,8 +89,7 @@ function contactSearch(stringLo) {
 }
 
 function sendMessage() {
-  var newDate = new Date();
-  var time = timeDigits(newDate.getHours()) + ":" + timeDigits(newDate.getMinutes());
+  var time = getUpdatedTime();
   $(".contatto.active").children("time").text(time);
   var chatTemplate = $("#template .user.message").clone();
   var message = $("#chat-footer input").val();
@@ -102,11 +99,26 @@ function sendMessage() {
   $("#chat-footer input").val("");
   $("#chat-footer .fa-microphone").show();
   $("#chat-footer .fa-paper-plane").hide();
-  var contactTemplate = $("#template .contact.message").clone();
-  contactTemplate.prepend(rispostaFiccante());
-  contactTemplate.children("time").text(time);
+  $(".chat-main.active").scrollTop($(".chat-main.active")[0].scrollHeight);
   $(".contatto.active").prependTo("#lista-contatti");
-  setTimeout(function() {$(".chat-main.active").append(contactTemplate)}, 1000);
+}
+
+function getReply() {
+  setTimeout(function() {
+    var time = getUpdatedTime();
+    var contactTemplate = $("#template .contact.message").clone();
+    contactTemplate.prepend(rispostaFiccante());
+    contactTemplate.children("time").text(time);
+    $(".contatto.active").prependTo("#lista-contatti");
+    $(".chat-main.active").append(contactTemplate);
+    $(".chat-main.active").scrollTop($(".chat-main.active")[0].scrollHeight);
+  }, 1000);
+}
+
+function getUpdatedTime() {
+  var newDate = new Date();
+  var time = timeDigits(newDate.getHours()) + ":" + timeDigits(newDate.getMinutes());
+  return time;
 }
 
 function timeDigits(number) {
@@ -133,7 +145,7 @@ function rispostaFiccante() {
     "mi hai fatto venire voglia di bere della cicuta",
     "tutt'ad un tratto il suicidio mi sembra un'opzione plausibile"
   ];
-  var randomNum = Math.floor(Math.random() * 5);
+  var randomNum = Math.floor(Math.random() * 7);
   return arrayRisposte[randomNum];
 }
 
