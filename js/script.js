@@ -42,6 +42,7 @@ $(document).ready(function() {
       if ($(event.target).hasClass('fa-chevron-down')) {
         var messageMenuClone = $("#template .message-menu").clone();
         messageMenuClone.prependTo($(event.target).parent("span"));
+        $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
       }
     }
   });
@@ -99,7 +100,7 @@ function sendMessage() {
   $("#chat-footer input").val("");
   $("#chat-footer .fa-microphone").show();
   $("#chat-footer .fa-paper-plane").hide();
-  $(".chat-main.active").scrollTop($(".chat-main.active")[0].scrollHeight);
+  $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
   $(".contatto.active").prependTo("#lista-contatti");
 }
 
@@ -111,7 +112,7 @@ function getReply() {
     contactTemplate.children("time").text(time);
     $(".contatto.active").prependTo("#lista-contatti");
     $(".chat-main.active").append(contactTemplate);
-    $(".chat-main.active").scrollTop($(".chat-main.active")[0].scrollHeight);
+    $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
   }, 1000);
 }
 
