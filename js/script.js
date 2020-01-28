@@ -41,10 +41,18 @@ $(document).ready(function() {
         $(".chat-main.active .fa-chevron-down").remove();
       }
     } else {
-      // SE NON C'è UN DROPDOWN GIà APERTO
+      // SE NON C'è UN DROPDOWN GIà APERTO, PUOI APRIRLO
       if ($(event.target).hasClass('fa-chevron-down')) {
         var messageMenuClone = $("#template .message-menu").clone();
         messageMenuClone.prependTo($(event.target).parent("span"));
+
+        var positionTop = $(event.target).parent(".message").position().top;
+        console.log(positionTop);
+        console.log($(".chat-main.active").height() + 10);
+        if (positionTop > $(".chat-main.active").height() + 10) {
+          var offsetMessage = $(event.target).parent(".message").prop("offsetTop") - 600;
+          $(".chat-main.active").scrollTop(offsetMessage);
+        }
       } else if ($(event.target).hasClass('fa-paper-plane')) {
           // INVIO MESSAGGIO AL CLICK SULL'AEROPLANINO
         sendMessage();
