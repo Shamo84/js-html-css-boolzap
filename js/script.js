@@ -42,7 +42,7 @@ $(document).ready(function() {
       if ($(event.target).hasClass('fa-chevron-down')) {
         var messageMenuClone = $("#template .message-menu").clone();
         messageMenuClone.prependTo($(event.target).parent("span"));
-        $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
+        // $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
       }
     }
   });
