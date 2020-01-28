@@ -49,12 +49,13 @@ $(document).ready(function() {
         var positionTop = $(event.target).parent(".message").position().top;
         console.log(positionTop);
         console.log($(".chat-main.active").height() + 10);
+        // SE IL DROPDOWN SBORDA ABBASSA UN PO LA SCROLL BAR
         if (positionTop > $(".chat-main.active").height() + 10) {
           var offsetMessage = $(event.target).parent(".message").prop("offsetTop") - 600;
           $(".chat-main.active").scrollTop(offsetMessage);
         }
       } else if ($(event.target).hasClass('fa-paper-plane')) {
-          // INVIO MESSAGGIO AL CLICK SULL'AEROPLANINO
+        // INVIO MESSAGGIO AL CLICK SULL'AEROPLANINO
         sendMessage();
         getReply();
       } else if ($(event.target).closest(".contatto").hasClass("contatto")) {
