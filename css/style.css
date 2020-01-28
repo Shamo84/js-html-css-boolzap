@@ -244,7 +244,7 @@ i {
 .chat-main .message-menu {
   position: absolute;
   right: 0;
-  bottom: -120px;
+  bottom: -103px;
   background-color: white;
   padding: 5px 10px;
   z-index: 2;

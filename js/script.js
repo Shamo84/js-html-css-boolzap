@@ -34,15 +34,20 @@ $(document).ready(function() {
         $(".contatto.active").children("time").text(newTime);
         riordinaContatti(newTime);
       } else if ($(event.target).hasClass("message") && ($(event.target).find("div").hasClass("message-menu"))) {
+        $(".chat-main.active .message-menu").remove();
       } else {
         $(".chat-main.active .message-menu").remove();
         $(".chat-main.active .fa-chevron-down").remove();
       }
     } else {
       if ($(event.target).hasClass('fa-chevron-down')) {
+        var oldHeight = $(".chat-main.active").scrollTop();
+        console.log(oldHeight);
         var messageMenuClone = $("#template .message-menu").clone();
         messageMenuClone.prependTo($(event.target).parent("span"));
         // $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
+        var newHeight = $(".chat-main.active").scrollTop();
+        console.log(newHeight);
       }
     }
   });
