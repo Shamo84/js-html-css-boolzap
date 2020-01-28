@@ -26,6 +26,7 @@ $(document).ready(function() {
   //  APRE IL MESSAGE MENU QUANDO CLIKKI LA FRECCIA E LO CHIUDE QUANDO CLIKKI FUORI
   $(document).on('click', function(event) {
     // SE C'è UN DROPDOWN APERTO
+    console.log($(event.target));
     if ($(".chat-main.active").find("div").hasClass("message-menu")) {
       if ($(event.target).hasClass("message-menu")) {
       } else if ($(event.target).hasClass('message-info')) {
@@ -47,8 +48,6 @@ $(document).ready(function() {
         messageMenuClone.prependTo($(event.target).parent("span"));
 
         var positionTop = $(event.target).parent(".message").position().top;
-        console.log(positionTop);
-        console.log($(".chat-main.active").height() + 10);
         // SE IL DROPDOWN SBORDA ABBASSA UN PO LA SCROLL BAR
         if (positionTop > $(".chat-main.active").height() + 10) {
           var offsetMessage = $(event.target).parent(".message").prop("offsetTop") - 600;
