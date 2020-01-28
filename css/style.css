@@ -1,3 +1,4 @@
+/* GENERALI */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,7 +10,14 @@ body {
   min-width: 1300px;
   overflow-y: hidden;
 }
+i {
+  color: #c4c4c4;
+  font-size: 22px;
+  padding: 8px;
+  cursor: pointer;
+}
 
+/* BACKGROUND */
 #top-background {
   background-color: #00BFA5;
   height: 138px;
@@ -19,12 +27,6 @@ body {
   height: calc(100vh - 138px);
 }
 
-i {
-  color: #c4c4c4;
-  font-size: 22px;
-  padding: 8px;
-  cursor: pointer;
-}
 .avatar {
   border-radius: 50%;
   background-size: cover;
@@ -43,7 +45,7 @@ i {
   transform: translate(-50%, -50%);
   display: flex;
 }
-
+/* SEZIONE DI SINISTRA (CONTATTI) */
 #contatti {
   width: 35%;
   background-color: #f9f9f9;
@@ -191,6 +193,8 @@ i {
   position: relative;
   top: -10px;
 }
+
+/* SEZIONE DI DESTRA (CHAT) */
 #chat-header {
   height: 70px;
   background-color: #f2f2f2;
@@ -243,7 +247,7 @@ i {
 }
 .chat-main .message-menu {
   position: absolute;
-  right: 0;
+  right: -30px;
   bottom: -103px;
   background-color: white;
   padding: 5px 10px;
@@ -276,6 +280,8 @@ i {
   width: 38px;
   text-align: center;
 }
+
+/* CLASSI DA AGGIUNGERE */
 .flex {
   display: flex;
   align-items: center;

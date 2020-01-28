@@ -4,7 +4,7 @@ $(document).ready(function() {
       var textLo = $("#cerca-contatti input").val().toLowerCase().trim();
       contactSearch(textLo);
   });
-  // CHEVRON DOWN QUANDO HOVERI SU UN MESSAGGIO
+  // CHEVRON DOWN COMPARE QUANDO HOVERI SU UN MESSAGGIO
   $(document).on("mouseover", ".chat-main.active span.message", function(event) {
     if ($(event.target).hasClass("message")) {
       if ($(event.target).find("i").hasClass("fa-chevron-down") == false) {
@@ -25,6 +25,7 @@ $(document).ready(function() {
   });
   //  APRE IL MESSAGE MENU QUANDO CLIKKI LA FRECCIA E LO CHIUDE QUANDO CLIKKI FUORI
   $(document).on('click', function(event) {
+    // SE C'è UN DROPDOWN APERTO
     if ($(".chat-main.active").find("div").hasClass("message-menu")) {
       if ($(event.target).hasClass("message-menu")) {
       } else if ($(event.target).hasClass('message-info')) {
@@ -33,55 +34,49 @@ $(document).ready(function() {
         var newTime = $(".chat-main.active").children("span:last-child").children("time").text();
         $(".contatto.active").children("time").text(newTime);
         riordinaContatti(newTime);
-      } else if ($(event.target).hasClass("message") && ($(event.target).find("div").hasClass("message-menu"))) {
+      } else if ($(event.target).hasClass("message") && ($(event.target).find("div").hasClass("message-menu")) || $(event.target).prop("localName") == "time") {
         $(".chat-main.active .message-menu").remove();
       } else {
         $(".chat-main.active .message-menu").remove();
         $(".chat-main.active .fa-chevron-down").remove();
       }
     } else {
+      // SE NON C'è UN DROPDOWN GIà APERTO
       if ($(event.target).hasClass('fa-chevron-down')) {
-        var oldHeight = $(".chat-main.active").scrollTop();
-        console.log(oldHeight);
         var messageMenuClone = $("#template .message-menu").clone();
         messageMenuClone.prependTo($(event.target).parent("span"));
-        // $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
-        var newHeight = $(".chat-main.active").scrollTop();
-        console.log(newHeight);
+      } else if ($(event.target).hasClass('fa-paper-plane')) {
+          // INVIO MESSAGGIO AL CLICK SULL'AEROPLANINO
+        sendMessage();
+        getReply();
+      } else if ($(event.target).closest(".contatto").hasClass("contatto")) {
+          // MOSTRA CHAT, IMMAGINE E NOME DEL CONTATTO ACTIVE
+        $(event.target).closest(".contatto").siblings().removeClass("active");
+        $(event.target).closest(".contatto").addClass("active");
+        var nomeContattoActive = $(event.target).closest(".contatto").find(".nome-contatto").text();
+        var contattoID = $(event.target).closest(".contatto").children(".avatar").attr("userid");
+        showContactChat(contattoID, nomeContattoActive);
       }
     }
   });
   // TOGGLE DELLE ICONE ALL'INPUT CHAT
   $("#chat-footer input").keyup(function(event) {
-      if ($("#chat-footer input").val().length == 0) {
-        $("#chat-footer .fa-microphone").show();
-        $("#chat-footer .fa-paper-plane").hide();
-      } else {
-        $("#chat-footer .fa-microphone").hide();
-        $("#chat-footer .fa-paper-plane").show();
-      }
+    if ($("#chat-footer input").val().length == 0) {
+      $("#chat-footer .fas").removeClass("fa-paper-plane").addClass("fa-microphone")
+    } else {
+      $("#chat-footer .fas").addClass("fa-paper-plane").removeClass("fa-microphone")
+    }
   });
-  // INVIO MESSAGGIO AL CLICK SULL'AEROPLANINO
-  $("#chat-footer .fa-paper-plane").click(function() {
-      sendMessage();
-      getReply();
-  });
-  // INVIO MESSAGGIO DALL'INPUT
+  // INVIO MESSAGGIO CON INVIO DALL'INPUT
   $("#chat-footer input").keypress(function(event) {
     if (event.which == 13 && $(this).val() != "") {
       sendMessage();
       getReply();
     }
   });
-  // MOSTRA CHAT, IMMAGINE E NOME DEL CONTATTO ACTIVE
-  $(document).on("click", ".contatto", function() {
-    $(this).siblings().removeClass("active");
-    $(this).addClass("active");
-    var nomeContattoActive = $(this).find(".nome-contatto").text();
-    var contattoID = $(this).children(".avatar").attr("userid");
-    showContactChat(contattoID, nomeContattoActive);
-  })
+
 });
+// RICERCA DEL TESTO NEL NOME DEI CONTATTI
 function contactSearch(stringLo) {
   var nameToLowerCase;
   for (var i = 0; i < $(".contatto").length; i++) {
@@ -94,6 +89,7 @@ function contactSearch(stringLo) {
   }
 }
 
+// INVIO DEI MESSAGGI
 function sendMessage() {
   var time = getUpdatedTime();
   $(".contatto.active").children("time").text(time);
@@ -103,12 +99,12 @@ function sendMessage() {
   chatTemplate.children("time").text(time);
   $(".chat-main.active").append(chatTemplate);
   $("#chat-footer input").val("");
-  $("#chat-footer .fa-microphone").show();
-  $("#chat-footer .fa-paper-plane").hide();
+  $("#chat-footer .fas").addClass("fa-microphone").removeClass("fa-paper-plane");
   $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
   $(".contatto.active").prependTo("#lista-contatti");
 }
 
+// RICEZIONE DELLA RISPOSTA
 function getReply() {
   setTimeout(function() {
     var time = getUpdatedTime();
@@ -121,12 +117,14 @@ function getReply() {
   }, 1000);
 }
 
+// AGGIORNA L'ORARIO DELL'ULTIMO MESSAGGIO DI UN CONTATTO
 function getUpdatedTime() {
   var newDate = new Date();
   var time = timeDigits(newDate.getHours()) + ":" + timeDigits(newDate.getMinutes());
   return time;
 }
 
+// AGGIUNGI ZERI ALL'ORARIO SE NECESSARIO
 function timeDigits(number) {
   if (number < 10) {
     number = "0" + number;
@@ -134,6 +132,7 @@ function timeDigits(number) {
   return number;
 }
 
+// MOSTRA CHAT, IMMAGINE E NOME DEL CONTATTO CLICCATO
 function showContactChat(userid, nomeContattoActive) {
   $(".chat-main.active").addClass("display-none").removeClass("active");
   $(".chat-main").eq(userid-1).addClass("active").removeClass("display-none");
@@ -141,6 +140,7 @@ function showContactChat(userid, nomeContattoActive) {
   $("#chat-header .nome-contatto").text(nomeContattoActive);
 }
 
+// RISPOSTE RANDOM
 function rispostaFiccante() {
   var arrayRisposte = [
     "neanche morto",
@@ -155,6 +155,7 @@ function rispostaFiccante() {
   return arrayRisposte[randomNum];
 }
 
+// RIORDINA CONTATTI IN BASE ALL'ORARIO DELL'ULTIMO MESSAGGIO
 function riordinaContatti(newTime) {
   var timeContatto;
   var i = 0;
