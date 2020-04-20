@@ -106,10 +106,13 @@ function sendMessage() {
   chatTemplate.prepend(message);
   chatTemplate.children("time").text(time);
   $(".chat-main.active").append(chatTemplate);
-  $("#chat-footer input").val("");
+  $(".chat-main.active").addClass("waiting-response");
+    $("#chat-footer input").val("");
   $("#chat-footer .fas").addClass("fa-microphone").removeClass("fa-paper-plane");
   $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
   $(".contatto.active").prependTo("#lista-contatti");
+  $(".contatto.active").addClass("waiting-response");
+
 }
 
 // RICEZIONE DELLA RISPOSTA
@@ -119,8 +122,10 @@ function getReply() {
     var contactTemplate = $("#template .contact.message").clone();
     contactTemplate.prepend(rispostaFiccante());
     contactTemplate.children("time").text(time);
-    $(".contatto.active").prependTo("#lista-contatti");
-    $(".chat-main.active").append(contactTemplate);
+    $(".contatto.waiting-response").prependTo("#lista-contatti");
+    $(".contatto.waiting-response").removeClass("waiting-response");
+    $(".chat-main.waiting-response").append(contactTemplate);
+    $(".chat-main.waiting-response").removeClass("waiting-response");
     $(".chat-main.active").scrollTop($(".chat-main.active").prop("scrollHeight"));
   }, 1000);
 }
